@@ -2,13 +2,11 @@ import argparse
 import os
 import tensorflow as tf
 
-from model.TestModelFunctional import NeuralTransferModel
-from ImgUtil import load_img, imshow, tensor_to_image
+from model.NeuralTransferModel import NeuralTransferModel
+from util.ImgUtil import load_img
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 import sys
-
-from model.StyleContentExtractor import StyleContentExtractor
 
 """
 Exporter class, exports the defined model wrapper into a SavedModel, which is able to be served and run independently.
@@ -31,19 +29,18 @@ class ModelExporter(object):
         style_image = load_img(style_path)
 
         model = NeuralTransferModel()
-        model.build(input_shape=[(None, None, None, 3), (None, None, None, 3)])
-
+        model.build(((None, None, None, 3), (None, None, None, 3)))
         print(model.summary(line_length=100))
-        #
-        # tf.keras.models.save_model(
-        #     model,
-        #     export_path,
-        #     overwrite=True,
-        #     include_optimizer=True,
-        #     save_format=None,
-        #     signatures=None,
-        #     options=None
-        # )
+
+        tf.keras.models.save_model(
+            model,
+            export_path,
+            overwrite=True,
+            include_optimizer=True,
+            save_format=None,
+            signatures=None,
+            options=None
+        )
 
         print('\nSaved model to: {}'.format(export_path))
 
