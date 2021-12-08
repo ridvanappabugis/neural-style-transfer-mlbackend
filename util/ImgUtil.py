@@ -30,7 +30,7 @@ def tensor_to_b64(tensor):
 
 def load_img(img):
     max_dim = 512
-    img = tf.io.decode_base64(base64.urlsafe_b64encode(base64.b64decode(img)))
+    img = tf.io.decode_base64(base64.urlsafe_b64encode(base64.standard_b64decode(img)))
     img = tf.image.decode_image(img, channels=3)
     img = tf.image.convert_image_dtype(img, tf.float32)
 
