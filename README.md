@@ -48,3 +48,8 @@ Response format:
 Anothery way is to run the model via the Jupyter Notebook. Provided are 2 Notebooks - ModelRunDefinition.ipynb & QuickRunModel.ipynb.
 
 Both are available under ```/notebooks```
+
+## References
+
+- "A Neural Algorithm of Artistic Style" by Leon A. Gatys, Alexander S. Ecker
+- https://www.tensorflow.org/tutorials/generative/style_transfer
