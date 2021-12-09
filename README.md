@@ -12,6 +12,12 @@ The resulting image will have the contents of the original content image, repres
 The process done is by using the VGG convolutional network, as to extract the tensor matrices for style and content. 
 Resulting image's tensor matrices are a middle point between these two.
 
+This projects imlements a modular Model that is able to be served in a rest api. The behaviour of the Model is to produce a stylized image in one Model call, so training was implemented in the actual call. As tensorflow does not have any way to do this graph-wise, subclassed Models and object oriented apporach was used to produce a Model that trains itself while calling it.
+
+A graph of the model logic can be seen below:
+![graph drawio](https://user-images.githubusercontent.com/37189321/145400226-e918e23e-6d67-419a-bc5a-26474abe9f57.png)
+
+
 ## How to run
 
 This project consists of two parts - <b>API Server</b> that is able to take requests, and a <b>Jupyter Notebook</b> that is able to run the model as well.
