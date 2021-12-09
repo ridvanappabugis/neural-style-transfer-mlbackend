@@ -29,25 +29,17 @@ def tensor_to_b64(tensor):
 
 
 def load_img(img):
-    max_dim = 512
     img = tf.io.decode_base64(base64.urlsafe_b64encode(base64.standard_b64decode(img)))
-    img = tf.image.decode_image(img, channels=3)
-    img = tf.image.convert_image_dtype(img, tf.float32)
-
-    shape = tf.cast(tf.shape(img)[:-1], tf.float32)
-    long_dim = max(shape)
-    scale = max_dim / long_dim
-
-    new_shape = tf.cast(shape * scale, tf.int32)
-
-    img = tf.image.resize(img, new_shape)
-    img = img[tf.newaxis, :]
-    return img
+    return load_img_tensor(img)
 
 
 def load_img_path(content_path):
-    max_dim = 512
     img = tf.io.read_file(content_path)
+    return load_img_tensor(img)
+
+
+def load_img_tensor(img):
+    max_dim = 512
     img = tf.image.decode_image(img, channels=3)
     img = tf.image.convert_image_dtype(img, tf.float32)
 

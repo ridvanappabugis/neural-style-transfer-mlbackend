@@ -1,15 +1,10 @@
 import argparse
 import os
-import tensorflow as tf
-
-from model.NeuralTransferModel import NeuralTransferModel
-from util.ImgUtil import load_img
-
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 import sys
 
 """
-Exporter class, exports the defined model wrapper into a SavedModel, which is able to be served and run independently.
+Exporter class, exports the defined model wrapper into a SavedModel, 
+which is able to be served and run independently.
 """
 
 
@@ -22,25 +17,17 @@ class ModelExporter(object):
         export_path = os.path.join(self.export_dir, str(self.version))
         print('export_path = {}\n'.format(export_path))
 
-        content_path = tf.keras.utils.get_file('YellowLabradorLooking_new.jpg', 'https://storage.googleapis.com/download.tensorflow.org/example_images/YellowLabradorLooking_new.jpg')
-        style_path = tf.keras.utils.get_file('test2.jpg', 'https://uploads2.wikiart.org/images/edvard-munch/the-scream-1893(2).jpg!Large.jpg')
+        # Initial and build Model here
 
-        content_image = load_img(content_path)
-        style_image = load_img(style_path)
-
-        model = NeuralTransferModel()
-        model.build(((None, None, None, 3), (None, None, None, 3)))
-        print(model.summary(line_length=100))
-
-        tf.keras.models.save_model(
-            model,
-            export_path,
-            overwrite=True,
-            include_optimizer=True,
-            save_format=None,
-            signatures=None,
-            options=None
-        )
+        # tf.keras.models.save_model(
+        #     model,
+        #     export_path,
+        #     overwrite=True,
+        #     include_optimizer=True,
+        #     save_format=None,
+        #     signatures=None,
+        #     options=None
+        # )
 
         print('\nSaved model to: {}'.format(export_path))
 

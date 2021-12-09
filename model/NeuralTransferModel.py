@@ -49,9 +49,10 @@ class NeuralTransferModel(tf.keras.Model):
 
         step = 0
         for n in range(epochs):
+            print("Processing epoch... ", end='', flush=True)
             for m in range(steps_per_epoch):
                 step += 1
                 self.train_step((style_target, content_target))
-                print(".", end='', flush=True)
+            print("Epoch: " + str(n+1) + " done.", end='\n', flush=True)
 
         return self.result
